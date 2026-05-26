@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Полина Шевченко — Бренд-стратег</title>
+  <meta name="description" content="Бренд-стратег в сегменте Premium & Lux. Стратегия на данных. Бренд — в памяти.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400;1,6..96,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+
+    /* ─── RESET ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #0c0b09;
+      color: #f4f1ec;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRAIN OVERLAY ─────────────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 300px 300px;
+      opacity: 0.038;
+      pointer-events: none;
+      z-index: 9000;
+    }
+
+    /* ─── SCROLL FADE ────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── SHARED TYPOGRAPHY ──────────────────────────────── */
+    .eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #c41230;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.05;
+      color: #f4f1ec;
+      margin-bottom: 3.5rem;
+    }
+    .section-heading--dark { color: #0c0b09; }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      display: inline-block;
+      padding: 1rem 2.75rem;
+      border: 1px solid currentColor;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+    .btn--light { color: #f4f1ec; }
+    .btn--light:hover { background: #f4f1ec; color: #0c0b09; }
+    .btn--dark { color: #0c0b09; }
+    .btn--dark:hover { background: #0c0b09; color: #f4f1ec; }
+
+
+    /* ══════════════════════════════════════════════════════
+       1. HERO
+    ══════════════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      background: #0c0b09;
+    }
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem) clamp(4rem, 8vw, 7rem) clamp(2rem, 8vw, 8rem);
+    }
+    .hero__name {
+      font-family: 'Jost', sans-serif;
+      font-size: clamp(0.75rem, 1.1vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(244,241,236,0.5);
+      margin-bottom: 1.5rem;
+    }
+    .hero__slogan {
+      font-family: 'Bodoni Moda', serif;
+      font-style: italic;
+      font-size: clamp(2rem, 4.2vw, 3.5rem);
+      font-weight: 400;
+      color: #f4f1ec;
+      line-height: 1.18;
+      margin-bottom: 1.25rem;
+    }
+    .hero__sub {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: rgba(244,241,236,0.75);
+      margin-bottom: 3.5rem;
+    }
+    .hero__image {
+      overflow: hidden;
+      position: relative;
+    }
+    .hero__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(100%) contrast(1.08);
+      display: block;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       2. О СЕБЕ
+    ══════════════════════════════════════════════════════ */
+    .about {
+      background: #f4f1ec;
+      color: #0c0b09;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 7rem);
+      align-items: center;
+      padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 8rem);
+    }
+    .about__manifesto {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.18;
+      color: #0c0b09;
+      margin-bottom: 3rem;
+    }
+    .about__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    .about__list li {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.875rem;
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      border-left: 1px solid #c41230;
+      color: #0c0b09;
+    }
+    .about__list li strong { font-weight: 400; }
+    .about__image img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.08);
+      display: block;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       3. УСЛУГИ
+    ══════════════════════════════════════════════════════ */
+    .services {
+      background: #0c0b09;
+      padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 8rem);
+    }
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .service-card {
+      grid-column: span 2;
+      background: #f4f1ec;
+      border: 1px solid #f4f1ec;
+      padding: 2.5rem 2rem;
+      transition: background 0.5s ease, border-color 0.5s ease;
+      cursor: pointer;
+    }
+    .service-card:nth-child(4) { grid-column: span 3; }
+    .service-card:nth-child(5) { grid-column: span 3; }
+    .service-card:hover {
+      background: #0c0b09;
+      border-color: rgba(244,241,236,0.2);
+    }
+    .service-card__tag {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #c41230;
+      margin-bottom: 1.75rem;
+      display: block;
+    }
+    .service-card__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.15;
+      color: #0c0b09;
+      margin-bottom: 1.75rem;
+      transition: color 0.5s ease;
+    }
+    .service-card__price {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 1rem;
+      color: #0c0b09;
+      margin-bottom: 0.4rem;
+      transition: color 0.5s ease;
+    }
+    .service-card__time {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: rgba(12,11,9,0.45);
+      transition: color 0.5s ease;
+    }
+    .service-card:hover .service-card__name,
+    .service-card:hover .service-card__price { color: #f4f1ec; }
+    .service-card:hover .service-card__time { color: rgba(244,241,236,0.4); }
+    .service-card.open {
+      background: #0c0b09;
+      border-color: rgba(244,241,236,0.2);
+    }
+    .service-card.open .service-card__name,
+    .service-card.open .service-card__price { color: #f4f1ec; }
+    .service-card.open .service-card__time { color: rgba(244,241,236,0.4); }
+    .service-card__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.75rem;
+    }
+    .service-card__top .service-card__tag { margin-bottom: 0; }
+    .service-card__icon {
+      width: 15px;
+      height: 15px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .service-card__icon::before,
+    .service-card__icon::after {
+      content: '';
+      position: absolute;
+      background: #0c0b09;
+      transition: transform 0.4s ease, opacity 0.4s ease, background 0.4s ease;
+    }
+    .service-card__icon::before { width: 100%; height: 1px; top: 50%; left: 0; }
+    .service-card__icon::after  { width: 1px; height: 100%; left: 50%; top: 0; }
+    .service-card:hover .service-card__icon::before,
+    .service-card:hover .service-card__icon::after,
+    .service-card.open .service-card__icon::before,
+    .service-card.open .service-card__icon::after { background: #f4f1ec; }
+    .service-card.open .service-card__icon::after { transform: rotate(90deg); opacity: 0; }
+    .service-card__details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.55s ease;
+    }
+    .service-card.open .service-card__details { max-height: 520px; }
+    .service-card__details-inner {
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(244,241,236,0.12);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: rgba(244,241,236,0.55);
+    }
+    .service-card__cta {
+      margin-top: 1.5rem;
+      font-size: 0.65rem;
+      padding: 0.7rem 1.6rem;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       4. КЕЙСЫ
+    ══════════════════════════════════════════════════════ */
+    .cases {
+      background: #f4f1ec;
+      color: #0c0b09;
+      padding-bottom: 0;
+    }
+    .cases__header {
+      padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 8rem) clamp(3rem, 5vw, 5rem);
+    }
+    .case {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      min-height: 55vh;
+      border-top: 1px solid rgba(12,11,9,0.1);
+    }
+    .case--reverse { grid-template-columns: 45% 55%; }
+    .case--reverse .case__image { order: 2; }
+    .case--reverse .case__text  { order: 1; }
+    .case__image {
+      overflow: hidden;
+      position: relative;
+    }
+    .case__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(85%) contrast(1.06);
+      display: block;
+      transition: filter 0.7s ease, transform 0.7s ease;
+    }
+    .case:hover .case__image img {
+      filter: grayscale(40%) contrast(1.1);
+      transform: scale(1.025);
+    }
+    .case__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(3rem, 5vw, 5rem) clamp(2.5rem, 5vw, 6rem);
+    }
+    .case__num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(12,11,9,0.07);
+      line-height: 1;
+      margin-bottom: -1.2rem;
+    }
+    .case__tag {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #c41230;
+      margin-bottom: 0.9rem;
+    }
+    .case__name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: #0c0b09;
+      margin-bottom: 1.25rem;
+    }
+    .case__desc {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: rgba(12,11,9,0.65);
+      margin-bottom: 1.75rem;
+    }
+    .case__result {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #0c0b09;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(12,11,9,0.12);
+    }
+    .case__result em {
+      font-style: normal;
+      font-weight: 300;
+      color: rgba(12,11,9,0.45);
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       5. КВИЗ
+    ══════════════════════════════════════════════════════ */
+    .quiz {
+      background: #0c0b09;
+      padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 8rem);
+    }
+    .quiz__body {
+      max-width: 720px;
+    }
+    .quiz__bars {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 3.5rem;
+    }
+    .quiz__bar {
+      flex: 1;
+      height: 1px;
+      background: rgba(244,241,236,0.12);
+      transition: background 0.5s ease;
+    }
+    .quiz__bar.on { background: #c41230; }
+    .quiz__step { display: none; }
+    .quiz__step.on { display: block; }
+    .quiz__step-label {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244,241,236,0.35);
+      margin-bottom: 0.6rem;
+    }
+    .quiz__q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+      font-weight: 400;
+      color: #f4f1ec;
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+    }
+    .quiz__opts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .quiz__opt {
+      padding: 1.1rem 1.4rem;
+      border: 1px solid rgba(244,241,236,0.18);
+      color: rgba(244,241,236,0.6);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.875rem;
+      cursor: pointer;
+      background: transparent;
+      text-align: left;
+      transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+    }
+    .quiz__opt:hover {
+      border-color: rgba(244,241,236,0.6);
+      color: #f4f1ec;
+    }
+    .quiz__opt.picked {
+      border-color: #c41230;
+      color: #f4f1ec;
+      background: rgba(196,18,48,0.07);
+    }
+    .quiz__final { display: none; }
+    .quiz__final.on { display: block; }
+    .form-row { margin-bottom: 1.75rem; }
+    .form-row label {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.66rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244,241,236,0.35);
+      margin-bottom: 0.7rem;
+    }
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(244,241,236,0.18);
+      padding: 0.65rem 0;
+      color: #f4f1ec;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus { border-bottom-color: #f4f1ec; }
+    .form-row textarea { resize: none; height: 72px; }
+    .form-row input.err,
+    .form-row textarea.err { border-bottom-color: #c41230; }
+    .quiz__submit-row { margin-top: 2.5rem; }
+    .quiz__done { display: none; padding: 2rem 0; }
+    .quiz__done.on { display: block; }
+    .quiz__done h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: #f4f1ec;
+      margin-bottom: 0.75rem;
+    }
+    .quiz__done p {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.875rem;
+      color: rgba(244,241,236,0.5);
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       6. FAQ
+    ══════════════════════════════════════════════════════ */
+    .faq {
+      background: #f4f1ec;
+      color: #0c0b09;
+      padding: clamp(5rem, 10vw, 10rem) clamp(2rem, 8vw, 8rem);
+    }
+    .faq__list { max-width: 820px; }
+    .faq__item { border-bottom: 1px solid rgba(12,11,9,0.12); }
+    .faq__item:first-child { border-top: 1px solid rgba(12,11,9,0.12); }
+    .faq__q {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 1.75rem 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .faq__q-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+      font-weight: 400;
+      line-height: 1.3;
+      color: #0c0b09;
+    }
+    .faq__icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      margin-top: 0.25rem;
+    }
+    .faq__icon::before, .faq__icon::after {
+      content: '';
+      position: absolute;
+      background: #0c0b09;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+    .faq__icon::before { width: 100%; height: 1px; top: 50%; left: 0; }
+    .faq__icon::after  { width: 1px; height: 100%; left: 50%; top: 0; }
+    .faq__item.open .faq__icon::after { transform: rotate(90deg); opacity: 0; }
+    .faq__a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .faq__item.open .faq__a { max-height: 600px; }
+    .faq__a-inner {
+      padding-bottom: 1.75rem;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.875rem;
+      line-height: 1.8;
+      color: rgba(12,11,9,0.65);
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       7. CTA
+    ══════════════════════════════════════════════════════ */
+    .cta {
+      background: #0c0b09;
+      padding: clamp(6rem, 12vw, 12rem) clamp(2rem, 8vw, 8rem);
+      text-align: center;
+    }
+    .cta__title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: #f4f1ec;
+      line-height: 1.15;
+      max-width: 780px;
+      margin: 0 auto 3rem;
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       8. FOOTER
+    ══════════════════════════════════════════════════════ */
+    footer {
+      background: #0c0b09;
+      border-top: 1px solid rgba(244,241,236,0.07);
+      padding: 1.75rem clamp(2rem, 8vw, 8rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: 'Jost', sans-serif;
+      font-weight: 200;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: rgba(244,241,236,0.25);
+    }
+
+
+    /* ══════════════════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero__image {
+        height: 65vw;
+        order: -1;
+      }
+      .hero__content {
+        padding: 3rem 7vw 4rem;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        padding: 5rem 7vw;
+      }
+      .about__image { order: -1; }
+      .about__image img { aspect-ratio: 4/3; }
+
+      .services__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .service-card { grid-column: span 1 !important; }
+
+      .case,
+      .case--reverse {
+        grid-template-columns: 1fr;
+      }
+      .case__image {
+        height: 60vw;
+        order: 0 !important;
+      }
+      .case__text {
+        order: 1 !important;
+        padding: 3rem 7vw;
+      }
+
+      .quiz__opts { grid-template-columns: 1fr; }
+
+      footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+    }
+
+    @media (max-width: 580px) {
+      .services__grid { grid-template-columns: 1fr; }
+      .cta__title { font-size: 2rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <!-- ═══════════════ 1. HERO ═══════════════ -->
+  <section class="hero" id="top">
+    <div class="hero__content">
+      <span class="eyebrow fade-up">Brand Strategist &nbsp;·&nbsp; Premium &amp; Lux</span>
+      <p class="hero__name fade-up">Полина Шевченко</p>
+      <h1 class="hero__slogan fade-up">Бренды не запоминают случайно — их просчитывают.</h1>
+      <p class="hero__sub fade-up">Стратегия на данных. Бренд — в памяти.</p>
+      <a href="#quiz" class="btn btn--light fade-up">Заявка на первичную консультацию</a>
+    </div>
+    <div class="hero__image">
+      <img src="img_tools.jpg" alt="Полина Шевченко">
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 2. О СЕБЕ ═══════════════ -->
+  <section class="about" id="about">
+    <div>
+      <span class="eyebrow fade-up">О себе</span>
+      <h2 class="about__manifesto fade-up">
+        Я не делаю маркетинг —<br>
+        я нахожу, где ваш бренд<br>
+        теряет деньги.
+      </h2>
+      <ul class="about__list">
+        <li class="fade-up">Бренд-стратег, <strong>8+ лет</strong> в маркетинге</li>
+        <li class="fade-up"><strong>50+ проектов</strong> в сегменте middle up, premium и выше</li>
+        <li class="fade-up">Работаю с основателями и командами, которым нужен <strong>результат в цифрах</strong>, а не отчёты</li>
+      </ul>
+    </div>
+    <div class="about__image fade-up">
+      <img src="img_polina.jpg" alt="Полина Шевченко">
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 3. УСЛУГИ ═══════════════ -->
+  <section class="services" id="services">
+    <span class="eyebrow fade-up">Услуги и цены</span>
+    <h2 class="section-heading fade-up">Что я делаю</h2>
+    <div class="services__grid">
+
+      <div class="service-card fade-up">
+        <div class="service-card__top">
+          <span class="service-card__tag">Стратегия</span>
+          <span class="service-card__icon"></span>
+        </div>
+        <h3 class="service-card__name">Бренд-стратегия</h3>
+        <p class="service-card__price">от 300 000 ₽</p>
+        <p class="service-card__time">15–20 дней</p>
+        <div class="service-card__details">
+          <div class="service-card__details-inner">
+            Основа бренда: миссия, позиционирование, все ключевые элементы в одной системе.<br><br>
+            — Пирамида бренда: brand essence, миссия, positioning map, лестница преимуществ, атрибуты;<br>
+            — Голос бренда (TOV) и уникальное предложение (USP);<br>
+            — Анализ всех групп ЦА и их триггеров (buyer persona);<br>
+            — Анализ конкурентов: локальные, концептуальные, SWOT;<br>
+            — PESTEL-анализ макросреды.<br><br>
+            <a href="#quiz" class="btn btn--light service-card__cta">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card__top">
+          <span class="service-card__tag">Коммуникации</span>
+          <span class="service-card__icon"></span>
+        </div>
+        <h3 class="service-card__name">Коммуникационная стратегия</h3>
+        <p class="service-card__price">от 180 000 ₽</p>
+        <p class="service-card__time">10–15 дней</p>
+        <div class="service-card__details">
+          <div class="service-card__details-inner">
+            Что должен «говорить» бренд, в каких каналах и как именно.<br><br>
+            — Ключевое сообщение в соответствии с позиционированием;<br>
+            — Исследование ЦА: pain points, каналы, информационное поведение;<br>
+            — Анализ конкурентного поля;<br>
+            — Подбор каналов: SEO, Telegram, ВКонтакте/YouTube, e-mail, PR, партнёрские размещения;<br>
+            — Медиа-микс и бюджетирование;<br>
+            — CJM (карта пути клиента);<br>
+            — Контент-стратегия на 3–6 месяцев + контент-план.<br><br>
+            <a href="#quiz" class="btn btn--light service-card__cta">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card__top">
+          <span class="service-card__tag">Контент</span>
+          <span class="service-card__icon"></span>
+        </div>
+        <h3 class="service-card__name">Контент-стратегия</h3>
+        <p class="service-card__price">от 150 000 ₽</p>
+        <p class="service-card__time">10–15 дней</p>
+        <div class="service-card__details">
+          <div class="service-card__details-inner">
+            Система контента, при которой каждый пост работает на бренд, а не просто заполняет ленту.<br><br>
+            — Аудит текущего контента и каналов;<br>
+            — Контент-пиллары: рубрики, форматы, подача;<br>
+            — Редакционная политика: TOV, стиль, частота;<br>
+            — Тематический план на 3–6 месяцев;<br>
+            — KPI и метрики эффективности.<br><br>
+            <a href="#quiz" class="btn btn--light service-card__cta">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card__top">
+          <span class="service-card__tag">Консультация</span>
+          <span class="service-card__icon"></span>
+        </div>
+        <h3 class="service-card__name">«Стратегическая»</h3>
+        <p class="service-card__price">85 000 ₽</p>
+        <p class="service-card__time">7–10 дней</p>
+        <div class="service-card__details">
+          <div class="service-card__details-inner">
+            Глубокое погружение в позиционирование и маркетинг. Выявляются слабые стороны и болевые точки, где «отпадают» клиенты.<br><br>
+            — Брифинг: вы получаете список вопросов;<br>
+            — Аналитика 360°: слабые зоны и зоны роста (5–7 наблюдений), портреты ЦА (3–5), анализ продуктовой матрицы;<br>
+            — Коммуникационное позиционирование: ключевое сообщение, brand pyramid, оценка каналов, рекомендации по корректировкам.<br><br>
+            Результат: файл с рекомендациями + онлайн-встреча (по запросу).<br><br>
+            <a href="#quiz" class="btn btn--light service-card__cta">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card fade-up">
+        <div class="service-card__top">
+          <span class="service-card__tag">Консультация</span>
+          <span class="service-card__icon"></span>
+        </div>
+        <h3 class="service-card__name">«База»</h3>
+        <p class="service-card__price">30 000 ₽</p>
+        <p class="service-card__time">90–120 минут</p>
+        <div class="service-card__details">
+          <div class="service-card__details-inner">
+            Для тех, кто запутался и не знает, что делать дальше: где использовать AI, корректировать контент, делать ребрендинг, вкладывать деньги в бизнес, менять команду, выходить на маркетплейсы.<br><br>
+            — Вы высылаете общий запрос и список вопросов;<br>
+            — Организуется звонок на 90–120 минут;<br>
+            — Получаете ответы на все вытекающие вопросы по вашему бренду и бизнесу.<br><br>
+            Если после консультации решите двигаться дальше — её стоимость вычтем из следующей услуги.<br><br>
+            <a href="#quiz" class="btn btn--light service-card__cta">Оставить заявку</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 4. КЕЙСЫ ═══════════════ -->
+  <section class="cases" id="cases">
+    <div class="cases__header">
+      <span class="eyebrow fade-up">Кейсы</span>
+      <h2 class="section-heading section-heading--dark fade-up">Проекты</h2>
+    </div>
+
+    <div class="case fade-up">
+      <div class="case__image">
+        <img src="img_book.jpg" alt="Бани Малевича">
+      </div>
+      <div class="case__text">
+        <p class="case__num">01</p>
+        <p class="case__tag">Wellness &amp; Lifestyle · Premium Spa</p>
+        <h3 class="case__name">Бани Малевича</h3>
+        <p class="case__desc">Разработка бренд-стратегии премиального банного и spa-комплекса.</p>
+        <p class="case__result"><em>Результат —</em> успешный запуск проекта в октябре 2025</p>
+      </div>
+    </div>
+
+    <div class="case case--reverse fade-up">
+      <div class="case__image">
+        <img src="img_coats.jpg" alt="Рестораны Раппопорта">
+      </div>
+      <div class="case__text">
+        <p class="case__num">02</p>
+        <p class="case__tag">F&amp;B · Premium Dining</p>
+        <h3 class="case__name">Рестораны Раппопорта</h3>
+        <p class="case__desc">Партнёрские интеграции через категории fashion и banking в premium-сегменте.</p>
+        <p class="case__result"><em>Результат —</em> привлечение бюджетов в проекты ресторанной группы</p>
+      </div>
+    </div>
+
+    <div class="case fade-up">
+      <div class="case__image">
+        <img src="img_mannequin.jpg" alt="PHATEMM">
+      </div>
+      <div class="case__text">
+        <p class="case__num">03</p>
+        <p class="case__tag">Fashion · Одежда</p>
+        <h3 class="case__name">PHATEMM</h3>
+        <p class="case__desc">Рост узнаваемости через инфлюенсеров: стратегия, разработка креативов, полный контроль реализации.</p>
+        <p class="case__result"><em>Результат —</em> ×7 заказов, +3000 подписчиков, + премиальная инфлюенс-органика</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 5. КВИЗ ═══════════════ -->
+  <section class="quiz" id="quiz">
+    <span class="eyebrow fade-up">Заявка на первичную консультацию</span>
+    <h2 class="section-heading fade-up">Расскажите о проекте</h2>
+
+    <div class="quiz__body">
+      <div class="quiz__bars">
+        <div class="quiz__bar on" id="b1"></div>
+        <div class="quiz__bar" id="b2"></div>
+        <div class="quiz__bar" id="b3"></div>
+        <div class="quiz__bar" id="b4"></div>
+      </div>
+
+      <div class="quiz__step on" id="s1">
+        <p class="quiz__step-label">Шаг 1 из 4</p>
+        <h3 class="quiz__q">Категория бизнеса</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" type="button" data-s="1" data-v="HoReCa">HoReCa</button>
+          <button class="quiz__opt" type="button" data-s="1" data-v="Fashion">Fashion</button>
+          <button class="quiz__opt" type="button" data-s="1" data-v="Beauty">Beauty</button>
+          <button class="quiz__opt" type="button" data-s="1" data-v="Wellness">Wellness</button>
+          <button class="quiz__opt" type="button" data-s="1" data-v="Другое">Другое</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" id="s2">
+        <p class="quiz__step-label">Шаг 2 из 4</p>
+        <h3 class="quiz__q">Задача</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" type="button" data-s="2" data-v="Запуск">Запуск</button>
+          <button class="quiz__opt" type="button" data-s="2" data-v="Ребрендинг">Ребрендинг</button>
+          <button class="quiz__opt" type="button" data-s="2" data-v="Продвижение (PR)">Продвижение (PR)</button>
+          <button class="quiz__opt" type="button" data-s="2" data-v="Бренд-стратегия с нуля">Бренд-стратегия с нуля</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" id="s3">
+        <p class="quiz__step-label">Шаг 3 из 4</p>
+        <h3 class="quiz__q">Бюджет</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" type="button" data-s="3" data-v="до 100к ₽">до 100к ₽</button>
+          <button class="quiz__opt" type="button" data-s="3" data-v="150–350к ₽">150–350к ₽</button>
+          <button class="quiz__opt" type="button" data-s="3" data-v="350–500к ₽">350–500к ₽</button>
+          <button class="quiz__opt" type="button" data-s="3" data-v="500к+ ₽">500к+ ₽</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" id="s4">
+        <p class="quiz__step-label">Шаг 4 из 4</p>
+        <h3 class="quiz__q">Сроки</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" type="button" data-s="4" data-v="1–2 месяца">1–2 месяца</button>
+          <button class="quiz__opt" type="button" data-s="4" data-v="3–6 месяцев">3–6 месяцев</button>
+          <button class="quiz__opt" type="button" data-s="4" data-v="Гибко">Гибко</button>
+        </div>
+      </div>
+
+      <div class="quiz__final" id="qFinal">
+        <p class="quiz__step-label">Последний шаг</p>
+        <h3 class="quiz__q">Как с вами связаться?</h3>
+        <div class="form-row">
+          <label>Имя</label>
+          <input type="text" id="fName" placeholder="Ваше имя" autocomplete="given-name">
+        </div>
+        <div class="form-row">
+          <label>Телефон</label>
+          <input type="tel" id="fPhone" placeholder="+7 (___) ___-__-__" autocomplete="tel">
+        </div>
+        <div class="form-row">
+          <label>Комментарий</label>
+          <textarea id="fComment" placeholder="Расскажите подробнее о проекте"></textarea>
+        </div>
+        <div class="quiz__submit-row">
+          <button class="btn btn--light" type="button" id="sendBtn">Отправить заявку</button>
+        </div>
+      </div>
+
+      <div class="quiz__done" id="qDone">
+        <h3>Заявка отправлена</h3>
+        <p>Свяжусь с вами в течение 24 часов</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 6. FAQ ═══════════════ -->
+  <section class="faq" id="faq">
+    <span class="eyebrow fade-up">Частые вопросы</span>
+    <h2 class="section-heading section-heading--dark fade-up">FAQ</h2>
+    <div class="faq__list">
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Что входит в бренд-стратегию?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Анализ рынка, бренд-платформа, коммуникационная стратегия, контент-стратегия, digital-стратегия.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Что такое консультация «БАЗА» и как она проходит?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <div class="faq__a-inner">
+            Консультация «БАЗА» — для тех, кто запутался и не знает, что делать дальше: где использовать AI, корректировать контент или нет, делать ребрендинг или нет, вкладывать деньги в бизнес или нет, менять ли команду, выходить на маркетплейсы или нет.<br><br>
+            Формат: вы высылаете общий запрос и список вопросов → организуется звонок на 90–120 минут.<br><br>
+            Результат: ответы на основной запрос и все вытекающие вопросы по вашему бренду/бизнесу в кратчайшие сроки.<br><br>
+            Стоимость: 30 000 ₽.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Что такое консультация «СТРАТЕГИЧЕСКАЯ» и как она проходит?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <div class="faq__a-inner">
+            Консультация «СТРАТЕГИЧЕСКАЯ» — глубокое погружение в позиционирование и маркетинг бренда. Выявляются слабые стороны и болевые точки, где «отпадают» клиенты. Это первый этап улучшения финансовых показателей.<br><br>
+            Формат работы:<br>
+            — Брифинг: вы получаете список вопросов;<br>
+            — Аналитика маркетинга на 360°: выявление слабых зон и зон роста (5–7 наблюдений), анализ восприятия и портреты ЦА (3–5 портретов), анализ продуктовой матрицы и маржинальных продуктов;<br>
+            — Коммуникационное позиционирование: анализ ключевого сообщения и brand pyramid, оценка контент-стратегии и всех каналов, рекомендации по корректировкам.<br><br>
+            Результат: файл с рекомендациями + онлайн-встреча (по запросу).<br>
+            Срок: 7–10 рабочих дней. Стоимость: 85 000 ₽.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Мне надо через месяц запуститься, успеем?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Я не работаю «на коленках», поэтому со мной не успеете. Лучше обратиться к другому специалисту.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Вы пишете стратегию — а сможете потом помочь со всем?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Да, у меня большая команда, которая поможет закрыть все вопросы — от PR и контент-маркетинга до digital блока.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Как проходит работа?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Всё начинается с брифинга: вы заполняете список вопросов, я погружаюсь в ваш бизнес. Дальше — заключение договора и приступаем: начинаем с аналитики, далее разработка стратегии и финальная сборка файла с рекомендациями. По запросу — онлайн-встреча для разбора. Никаких бесконечных правок и «подождите ещё неделю» — сроки фиксируются на старте и в договоре.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Как понять, какая услуга мне нужна?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Если не знаете, с чего начать — начните с консультации «База». За 90–120 минут разберём ваш запрос и определим, что именно нужно бренду прямо сейчас. Это самый быстрый способ получить ясность без лишних затрат. Если поймёте, что вам нужна последующая услуга — вычтем стоимость консультации и перейдём к другой задаче.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Оплата частями возможна?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Да, работаю с поэтапной оплатой: 50% на старте работ, 50% по завершении. Детали обсуждаем индивидуально.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Работаете ли вы с командой или в одиночку?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">У меня есть команда, которая закрывает смежные задачи — PR, контент-маркетинг, digital. Стратегию разрабатываю лично совместно с аналитиком и младшим стратегом.</p>
+        </div>
+      </div>
+
+      <div class="faq__item fade-up">
+        <div class="faq__q">
+          <span class="faq__q-text">Нужна ли стратегия, если у меня уже есть маркетолог?</span>
+          <span class="faq__icon"></span>
+        </div>
+        <div class="faq__a">
+          <p class="faq__a-inner">Маркетолог реализует. Стратег определяет, что именно реализовывать и зачем. Также нельзя не отметить, что внутри компании часто есть «замыленный взгляд» — альтернативные действия всегда работают на вас.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════ 7. CTA ═══════════════ -->
+  <section class="cta" id="contact">
+    <h2 class="cta__title fade-up">
+      Ваш бренд заслуживает<br>
+      быть в памяти,<br>
+      а не в архиве.
+    </h2>
+    <a href="https://t.me/polina_shevch" target="_blank" rel="noopener" class="btn btn--light fade-up">
+      Написать в Telegram
+    </a>
+  </section>
+
+
+  <!-- ═══════════════ 8. FOOTER ═══════════════ -->
+  <footer>
+    <p>Полина Шевченко</p>
+    <p>© 2025</p>
+  </footer>
+
+
+  <script>
+    // ── SCROLL ANIMATIONS ──────────────────────────────────
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      if (el.closest('.hero')) {
+        // Hero fires immediately with stagger
+      } else {
+        io.observe(el);
+      }
+    });
+
+    // Hero stagger on load
+    document.querySelectorAll('.hero .fade-up').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), 180 + i * 140);
+    });
+
+
+    // ── QUIZ ───────────────────────────────────────────────
+    const ans = {};
+    let cur = 1;
+
+    document.querySelectorAll('.quiz__opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const s = +btn.dataset.s;
+        const v = btn.dataset.v;
+        document.querySelectorAll(`.quiz__opt[data-s="${s}"]`).forEach(b => b.classList.remove('picked'));
+        btn.classList.add('picked');
+        ans[s] = v;
+        setTimeout(() => {
+          if (s < 4) goStep(s + 1);
+          else       goFinal();
+        }, 320);
+      });
+    });
+
+    function goStep(n) {
+      document.getElementById(`s${cur}`).classList.remove('on');
+      cur = n;
+      document.getElementById(`s${n}`).classList.add('on');
+      for (let i = 1; i <= 4; i++)
+        document.getElementById(`b${i}`).classList.toggle('on', i <= n);
+    }
+
+    function goFinal() {
+      document.getElementById(`s${cur}`).classList.remove('on');
+      document.getElementById('qFinal').classList.add('on');
+      for (let i = 1; i <= 4; i++) document.getElementById(`b${i}`).classList.add('on');
+    }
+
+
+    // ── TELEGRAM SUBMIT ────────────────────────────────────
+    // Replace these two values before deploying:
+    const TG_TOKEN = '8967590104:AAGHvQlglYQu_DTldyLB33YIbajRYXwSEkY';
+    const TG_CHAT  = '60345695';
+
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+      const name    = document.getElementById('fName').value.trim();
+      const phone   = document.getElementById('fPhone').value.trim();
+      const comment = document.getElementById('fComment').value.trim();
+
+      let ok = true;
+      ['fName','fPhone'].forEach(id => {
+        const el = document.getElementById(id);
+        const empty = !el.value.trim();
+        el.classList.toggle('err', empty);
+        if (empty) ok = false;
+      });
+      if (!ok) return;
+
+      const text = [
+        '📩 Новая заявка с сайта',
+        '',
+        `Категория: ${ans[1] || '—'}`,
+        `Задача: ${ans[2] || '—'}`,
+        `Бюджет: ${ans[3] || '—'}`,
+        `Сроки: ${ans[4] || '—'}`,
+        '',
+        `Имя: ${name}`,
+        `Телефон: ${phone}`,
+        `Комментарий: ${comment || '—'}`,
+      ].join('\n');
+
+      try {
+        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: TG_CHAT, text }),
+        });
+        document.getElementById('qFinal').classList.remove('on');
+        document.getElementById('qDone').classList.add('on');
+      } catch {
+        alert('Ошибка отправки. Попробуйте позже или напишите напрямую в Telegram.');
+      }
+    });
+
+    // Remove err highlight on input
+    ['fName','fPhone'].forEach(id => {
+      document.getElementById(id).addEventListener('input', function() {
+        this.classList.remove('err');
+      });
+    });
+
+
+    // ── SERVICE CARDS → QUIZ ───────────────────────────────
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('.service-card__cta')) return;
+        const isOpen = card.classList.contains('open');
+        document.querySelectorAll('.service-card').forEach(c => c.classList.remove('open'));
+        if (!isOpen) card.classList.add('open');
+      });
+    });
+
+    // ── FAQ ACCORDION ──────────────────────────────────────
+    document.querySelectorAll('.faq__q').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const was  = item.classList.contains('open');
+        document.querySelectorAll('.faq__item').forEach(i => i.classList.remove('open'));
+        if (!was) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
