@@ -879,10 +879,11 @@
         <div class="quiz__bar" id="b2"></div>
         <div class="quiz__bar" id="b3"></div>
         <div class="quiz__bar" id="b4"></div>
+        <div class="quiz__bar" id="b5"></div>
       </div>
 
       <div class="quiz__step on" id="s1">
-        <p class="quiz__step-label">Шаг 1 из 4</p>
+        <p class="quiz__step-label">Шаг 1 из 5</p>
         <h3 class="quiz__q">Категория бизнеса</h3>
         <div class="quiz__opts">
           <button class="quiz__opt" type="button" data-s="1" data-v="HoReCa">HoReCa</button>
@@ -894,7 +895,7 @@
       </div>
 
       <div class="quiz__step" id="s2">
-        <p class="quiz__step-label">Шаг 2 из 4</p>
+        <p class="quiz__step-label">Шаг 2 из 5</p>
         <h3 class="quiz__q">Задача</h3>
         <div class="quiz__opts">
           <button class="quiz__opt" type="button" data-s="2" data-v="Запуск">Запуск</button>
@@ -905,7 +906,7 @@
       </div>
 
       <div class="quiz__step" id="s3">
-        <p class="quiz__step-label">Шаг 3 из 4</p>
+        <p class="quiz__step-label">Шаг 3 из 5</p>
         <h3 class="quiz__q">Бюджет</h3>
         <div class="quiz__opts">
           <button class="quiz__opt" type="button" data-s="3" data-v="до 100к ₽">до 100к ₽</button>
@@ -916,12 +917,25 @@
       </div>
 
       <div class="quiz__step" id="s4">
-        <p class="quiz__step-label">Шаг 4 из 4</p>
+        <p class="quiz__step-label">Шаг 4 из 5</p>
         <h3 class="quiz__q">Сроки</h3>
         <div class="quiz__opts">
           <button class="quiz__opt" type="button" data-s="4" data-v="1–2 месяца">1–2 месяца</button>
           <button class="quiz__opt" type="button" data-s="4" data-v="3–6 месяцев">3–6 месяцев</button>
           <button class="quiz__opt" type="button" data-s="4" data-v="Гибко">Гибко</button>
+        </div>
+      </div>
+
+      <div class="quiz__step" id="s5">
+        <p class="quiz__step-label">Шаг 5 из 5</p>
+        <h3 class="quiz__q">Какая услуга вас интересует?</h3>
+        <div class="quiz__opts">
+          <button class="quiz__opt" type="button" data-s="5" data-v="Бренд-стратегия">Бренд-стратегия</button>
+          <button class="quiz__opt" type="button" data-s="5" data-v="Коммуникационная стратегия">Коммуникационная стратегия</button>
+          <button class="quiz__opt" type="button" data-s="5" data-v="Контент-стратегия">Контент-стратегия</button>
+          <button class="quiz__opt" type="button" data-s="5" data-v="Консультация «Стратегическая»">Консультация «Стратегическая»</button>
+          <button class="quiz__opt" type="button" data-s="5" data-v="Консультация «База»">Консультация «База»</button>
+          <button class="quiz__opt" type="button" data-s="5" data-v="Ещё не определился(-ась)">Ещё не определился(-ась)</button>
         </div>
       </div>
 
@@ -1128,7 +1142,7 @@
         btn.classList.add('picked');
         ans[s] = v;
         setTimeout(() => {
-          if (s < 4) goStep(s + 1);
+          if (s < 5) goStep(s + 1);
           else       goFinal();
         }, 320);
       });
@@ -1138,14 +1152,14 @@
       document.getElementById(`s${cur}`).classList.remove('on');
       cur = n;
       document.getElementById(`s${n}`).classList.add('on');
-      for (let i = 1; i <= 4; i++)
+      for (let i = 1; i <= 5; i++)
         document.getElementById(`b${i}`).classList.toggle('on', i <= n);
     }
 
     function goFinal() {
       document.getElementById(`s${cur}`).classList.remove('on');
       document.getElementById('qFinal').classList.add('on');
-      for (let i = 1; i <= 4; i++) document.getElementById(`b${i}`).classList.add('on');
+      for (let i = 1; i <= 5; i++) document.getElementById(`b${i}`).classList.add('on');
     }
 
 
@@ -1175,6 +1189,7 @@
         `Задача: ${ans[2] || '—'}`,
         `Бюджет: ${ans[3] || '—'}`,
         `Сроки: ${ans[4] || '—'}`,
+        `Услуга: ${ans[5] || '—'}`,
         '',
         `Имя: ${name}`,
         `Телефон: ${phone}`,
